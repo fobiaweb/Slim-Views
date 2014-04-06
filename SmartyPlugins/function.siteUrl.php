@@ -13,7 +13,7 @@
 function smarty_function_siteUrl($params, $template)
 {
     $withUri = isset($params['withUri']) ? $params['withUri'] : true;
-    $app     = isset($params['app']) ? $params['app'] : \Fobia\App::getInstance();
+    $app     = isset($params['app']) ? $params['app'] : \Fobia\Application::getInstance();
     $url     = isset($params['url']) ? $params['url'] : '';
 
     $req = $app->request;
