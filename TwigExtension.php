@@ -84,6 +84,7 @@ class TwigExtension extends \Twig_Extension
         $uri = $app->config('webpath');
         if ($withUri) {
             $uri = $app->request->getUrl().$uri;
-        );
+        }
+        return $uri;
     }
 }
