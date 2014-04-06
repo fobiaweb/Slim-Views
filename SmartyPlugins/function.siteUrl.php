@@ -13,16 +13,16 @@
 function smarty_function_siteUrl($params, $template)
 {
     $withUri = isset($params['withUri']) ? $params['withUri'] : true;
-    $app     = isset($params['app']) ? $params['app'] : \Fobia\Application::getInstance();
+    $app     = /*isset($params['app']) ? $params['app'] :*/ \Fobia\Application::getInstance();
     $url     = isset($params['url']) ? $params['url'] : '';
 
     $req = $app->request;
     $uri = $req->getUrl();
 
-    if ($withUri) {
-        $uri .= $req->gerUrl();
+    // if ($withUri) {
+        // $uri .= $req->gerUrl();
         // $uri .= $req->getRootUri();
-    }
+    // }
 
     return $uri . '/' . ltrim($url, '/');
 }

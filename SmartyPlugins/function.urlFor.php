@@ -13,7 +13,7 @@
 function smarty_function_urlFor($params, $template)
 {
     $name = isset($params['name']) ? $params['name'] : '';
-    $app  = isset($params['app']) ? $params['app'] : \Fobia\Application::getInstance();
+    $app  = /*isset($params['app']) ? $params['app'] :*/ \Fobia\Application::getInstance();
 
     $url = $app->urlFor($name);
 

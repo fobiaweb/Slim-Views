@@ -13,7 +13,7 @@
 function smarty_function_webPath($params, $template)
 {
     $withUri = isset($params['withUri']) ? $params['withUri'] : false;
-    $app     = isset($params['app']) ? $params['app'] : \Fobia\Application::getInstance();
+    $app     = /*isset($params['app']) ? $params['app'] :*/ \Fobia\Application::getInstance();
 
     $uri = $app->config('webpath');
 
