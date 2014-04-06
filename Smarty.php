@@ -6,7 +6,7 @@
  * @author      Andrew Smith
  * @link        http://www.slimframework.com
  * @copyright   2013 Josh Lockhart
- * @version     0.1.0
+ * @version     0.1.2
  * @package     SlimViews
  *
  * MIT LICENSE
@@ -78,11 +78,11 @@ class Smarty extends \Slim\View
      *
      * This method will output the rendered template content
      *
-     * @param    string $template The path to the template, relative to the  templates directory.
-     * @param array $data
-     * @return   void
+     * @param string $template The path to the template, relative to the  templates directory.
+     * @param null $data
+     * @return string
      */
-    public function render($template, array $data = array())
+    public function render($template, $data = null)
     {
         $parser = $this->getInstance();
         $parser->assign($this->all());
@@ -103,6 +103,8 @@ class Smarty extends \Slim\View
                 // if (!is_dir($this->parserDirectory)) {
                 //     throw new \RuntimeException('Cannot set the Smarty lib directory : ' . $this->parserDirectory . '. Directory does not exist.');
                 // }
+                // require_once $this->parserDirectory . '/Smarty.class.php';
+
                 if (file_exists( $this->parserDirectory . '/Smarty.class.php')) {
                     require_once $this->parserDirectory . '/Smarty.class.php';
                 } else {
@@ -111,7 +113,7 @@ class Smarty extends \Slim\View
             }
 
             $this->parserInstance = new \Smarty();
-            $this->parserInstance->template_dir = $this->templateDirectory;
+            $this->parserInstance->template_dir = $this->templateDirectory();
             $this->parserInstance->addPluginsDir(__DIR__.'/SmartyPlugins');
             if ($this->parserExtensions) {
                 $this->parserInstance->addPluginsDir($this->parserExtensions);

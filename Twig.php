@@ -6,7 +6,7 @@
  * @author      Andrew Smith
  * @link        http://www.slimframework.com
  * @copyright   2013 Josh Lockhart
- * @version     0.1.0
+ * @version     0.1.2
  * @package     SlimViews
  *
  * MIT LICENSE
@@ -77,17 +77,20 @@ class Twig extends \Slim\View
      *
      * This method will output the rendered template content
      *
-     * @param   string $template The path to the Twig template, relative to the Twig templates directory.
+     * @param string $template The path to the Twig template, relative to the Twig templates directory.
      * @param null $data
-     * @return  void
+     * @return string
      */
     public function render($template, array $data = array())
     {
         $env = $this->getInstance();
         $parser = $env->loadTemplate($template);
 
-        return $parser->render($this->all(), $data);
+        $data = array_merge($this->all(), (array) $data);
+
+        return $parser->render($data);
     }
+
 
 
     /**
@@ -112,6 +115,7 @@ class Twig extends \Slim\View
             \Twig_Autoloader::register();
 
             $loader = new \Twig_Loader_Filesystem($this->templateDirectory);
+
             $this->parserInstance = new \Twig_Environment(
                 $loader,
                 $this->parserOptions
@@ -125,4 +129,5 @@ class Twig extends \Slim\View
 
         return $this->parserInstance;
     }
+
 }

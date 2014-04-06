@@ -6,7 +6,7 @@
  * @author      Andrew Smith
  * @link        http://www.slimframework.com
  * @copyright   2013 Josh Lockhart
- * @version     0.1.0
+ * @version     0.1.2
  * @package     SlimViews
  *
  * MIT LICENSE
@@ -53,7 +53,8 @@ class TwigExtension extends \Twig_Extension
 
     public function urlFor($name, $params = array())
     {
-        return $_ENV['app']->urlFor($name, $params);
+        $app = \Fobia\App::getInstance();
+        return $app->urlFor($name, $params);
     }
 
     public function site($url, $withUri = true)
@@ -63,22 +64,26 @@ class TwigExtension extends \Twig_Extension
 
     public function base($withUri = true)
     {
-        $req = $_ENV['app']->request();
-        $uri = $req->getUrl();
+        $request = \Fobia\App::getInstance()->request;
 
         if ($withUri) {
-            $uri = $req->getPath();
+            $uri = $request->getPath();
+        } else {
+            $uri = $request->getUrl();
         }
+    //     $uri = $req->getUrl();
+    //     if ($withUri) {
+    //         $uri .= $req->getRootUri();
+    //     }
         return $uri;
     }
 
     public function webPath($withUri = true)
     {
-        $app = $_ENV['app'];
+        $app = \Fobia\App::getInstance();
         $uri = $app->config('webpath');
         if ($withUri) {
             $uri = $app->request->getUrl().$uri;
-        }
-        return $uri;
+        );
     }
 }
