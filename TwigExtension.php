@@ -32,7 +32,6 @@
  */
 namespace Slim\Views;
 
-use Slim\App;
 
 class TwigExtension extends \Twig_Extension
 {
@@ -53,38 +52,46 @@ class TwigExtension extends \Twig_Extension
 
     public function urlFor($name, $params = array())
     {
-        $app = \Fobia\App::getInstance();
+        $app = \Fobia\Application::getInstance();
         return $app->urlFor($name, $params);
     }
 
-    public function site($url, $withUri = true)
+    public function site($url, $withUri = false)
     {
-        return $this->base($withUri) . '/' . ltrim($url, '/');
-    }
-
-    public function base($withUri = true)
-    {
-        $request = \Fobia\App::getInstance()->request;
+        $app = \Fobia\Application::getInstance();
+        $req = $app->request;
+        $uri = $app->config('webpath'); //$req->getUrl();
 
         if ($withUri) {
-            $uri = $request->getPath();
-        } else {
-            $uri = $request->getUrl();
+           $uri = $req->getUrl() . $uri;
         }
-    //     $uri = $req->getUrl();
-    //     if ($withUri) {
-    //         $uri .= $req->getRootUri();
-    //     }
+
+        return $uri . '/' . ltrim($url, '/');
+    }
+
+    public function base($withUri = false)
+    {
+        $app = \Fobia\Application::getInstance();
+        $req = $app->request;
+
+        $uri = $req->getPath();
+
+        if ($withUri) {
+           $uri = $req->getUrl() . $uri;
+        }
+
         return $uri;
     }
 
-    public function webPath($withUri = true)
+    public function webPath($withUri = false)
     {
-        $app = \Fobia\App::getInstance();
+        $app = \Fobia\Application::getInstance();
         $uri = $app->config('webpath');
+
         if ($withUri) {
             $uri = $app->request->getUrl().$uri;
         }
+
         return $uri;
     }
 }

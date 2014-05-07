@@ -12,17 +12,16 @@
  */
 function smarty_function_siteUrl($params, $template)
 {
-    $withUri = isset($params['withUri']) ? $params['withUri'] : true;
-    $app     = /*isset($params['app']) ? $params['app'] :*/ \Fobia\Application::getInstance();
+    $withUri = isset($params['withUri']) ? $params['withUri'] : false;
     $url     = isset($params['url']) ? $params['url'] : '';
 
+    $app = \Fobia\Application::getInstance();
     $req = $app->request;
-    $uri = $req->getUrl();
+    $uri = $app->config('webpath'); //$req->getUrl();
 
-    // if ($withUri) {
-        // $uri .= $req->gerUrl();
-        // $uri .= $req->getRootUri();
-    // }
+    if ($withUri) {
+       $uri = $req->getUrl() . $uri;
+    }
 
     return $uri . '/' . ltrim($url, '/');
 }

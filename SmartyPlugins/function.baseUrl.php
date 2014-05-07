@@ -12,17 +12,18 @@
  */
 function smarty_function_baseUrl($params, $template)
 {
-    $withUri = isset($params['withUri']) ? $params['withUri'] : true;
-    $app     = /*isset($params['app']) ? $params['app'] :*/ \Fobia\Application::getInstance();
+    $withUri = isset($params['withUri']) ? $params['withUri'] : false;
 
-    /* @var $req Slim\Http\Request */
+    $app = \Fobia\Application::getInstance();
     $req = $app->request;
 
-    $uri = $req->getUrl();
+    /* @var $req Slim\Http\Request */
 
-//    if ($withUri) {
-//        $uri .= $req->getUrl();
-//    }
+    $uri = $req->getPath();
+
+   if ($withUri) {
+       $uri = $req->getUrl() . $uri;
+   }
 
     return $uri;
 }
