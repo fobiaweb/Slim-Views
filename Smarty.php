@@ -120,9 +120,13 @@ class Smarty extends \Slim\View
             }
             if ($this->parserCompileDirectory) {
                 $this->parserInstance->setCompileDir($this->parserCompileDirectory);
+            } else {
+                $this->parserInstance->setCompileDir(dirname($this->templateDirectory) . '/templates_c/');
             }
             if ($this->parserCacheDirectory) {
                 $this->parserInstance->setCacheDir($this->parserCacheDirectory);
+            } else {
+                $this->parserInstance->setCompileDir(dirname($this->templateDirectory) . '/templates_c/');
             }
         }
 
