@@ -45,51 +45,24 @@ class TwigExtension extends \Twig_Extension
         return array(
             new \Twig_SimpleFunction('urlFor', array($this, 'urlFor')),
             new \Twig_SimpleFunction('baseUrl', array($this, 'base')),
-            new \Twig_SimpleFunction('siteUrl', array($this, 'site')),
-            new \Twig_SimpleFunction('webPath', array($this, 'webPath')),
         );
     }
 
     public function urlFor($name, $params = array())
     {
-        $app = \Fobia\Application::getInstance();
+        $app = \App::instance();
         return $app->urlFor($name, $params);
-    }
-
-    public function site($url, $withUri = false)
-    {
-        $app = \Fobia\Application::getInstance();
-        $req = $app->request;
-        $uri = $app->config('webpath'); //$req->getUrl();
-
-        if ($withUri) {
-           $uri = $req->getUrl() . $uri;
-        }
-
-        return $uri . '/' . ltrim($url, '/');
     }
 
     public function base($withUri = false)
     {
-        $app = \Fobia\Application::getInstance();
+        $app = \App::instance();
         $req = $app->request;
 
         $uri = $req->getPath();
 
         if ($withUri) {
            $uri = $req->getUrl() . $uri;
-        }
-
-        return $uri;
-    }
-
-    public function webPath($withUri = false)
-    {
-        $app = \Fobia\Application::getInstance();
-        $uri = $app->config('webpath');
-
-        if ($withUri) {
-            $uri = $app->request->getUrl().$uri;
         }
 
         return $uri;

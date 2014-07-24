@@ -14,7 +14,7 @@ function smarty_function_urlFor($params, $template)
 {
     $name = isset($params['name']) ? $params['name'] : '';
 
-    $app  = \Fobia\Application::getInstance();
+    $app  = \App::instance();
     $url = $app->urlFor($name);
 
 	if (isset($params['options']))

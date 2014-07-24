@@ -84,9 +84,12 @@ class Smarty extends \Slim\View
      */
     public function render($template, $data = null)
     {
+        if ('php' ==  pathinfo($template, PATHINFO_EXTENSION)) {
+            return parent::render($template, (array) $data);
+        }
+
         $parser = $this->getInstance();
         $parser->assign($this->all());
-
         return $parser->fetch($template, $data);
     }
 
@@ -114,7 +117,9 @@ class Smarty extends \Slim\View
 
             $this->parserInstance = new \Smarty();
             $this->parserInstance->setTemplateDir($this->templateDirectory);
-            $this->parserInstance->addPluginsDir(__DIR__.'/SmartyPlugins');
+
+            // $this->parserInstance->addPluginsDir(__DIR__.'/SmartyPlugins');
+
             if ($this->parserExtensions) {
                 $this->parserInstance->addPluginsDir($this->parserExtensions);
             }

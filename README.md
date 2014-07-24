@@ -1,8 +1,8 @@
 # Slim Views
 
-This repository contains custom View classes for the template frameworks listed below. 
-You can use any of these custom View classes by either requiring the appropriate class in your 
-Slim Framework bootstrap file and initialize your Slim application using an instance of 
+This repository contains custom View classes for the template frameworks listed below.
+You can use any of these custom View classes by either requiring the appropriate class in your
+Slim Framework bootstrap file and initialize your Slim application using an instance of
 the selected View class or using Composer (the recommended way).
 
 Slim Views only officially support the following views listed below.
@@ -15,7 +15,7 @@ Slim Views only officially support the following views listed below.
 #### using [Composer](http://getcomposer.org/)
 
 Create a composer.json file in your project root:
-    
+
 ```json
 {
     "require": {
@@ -33,7 +33,7 @@ $ php composer.phar install
 ## Smarty
 
 ### How to use
-    
+
 ```php
 <?php
 require 'vendor/autoload.php';
@@ -44,7 +44,7 @@ $app = new \Slim\Slim(array(
 ```
 
 To use Smarty options do the following:
-    
+
 ```php
 $view = $app->view();
 $view->parserDirectory = dirname(__FILE__) . 'smarty';
@@ -55,7 +55,7 @@ $view->parserCacheDirectory = dirname(__FILE__) . '/cache';
 ## Twig
 
 ### How to use
-    
+
 ```php
 <?php
 require 'vendor/autoload.php';
@@ -66,7 +66,7 @@ $app = new \Slim\Slim(array(
 ```
 
 To use Twig options do the following:
-    
+
 ```php
 $view = $app->view();
 $view->parserOptions = array(

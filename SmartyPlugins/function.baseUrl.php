@@ -14,7 +14,7 @@ function smarty_function_baseUrl($params, $template)
 {
     $withUri = isset($params['withUri']) ? $params['withUri'] : false;
 
-    $app = \Fobia\Application::getInstance();
+    $app  = \App::instance();
     $req = $app->request;
 
     /* @var $req Slim\Http\Request */
