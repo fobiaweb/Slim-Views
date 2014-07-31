@@ -83,6 +83,10 @@ class Twig extends \Slim\View
      */
     public function render($template, array $data = array())
     {
+        if ('php' ==  pathinfo($template, PATHINFO_EXTENSION)) {
+            return parent::render($template, $data);
+        }
+
         $env = $this->getInstance();
         $parser = $env->loadTemplate($template);
 
