@@ -46,7 +46,7 @@ namespace Slim\Views;
  * @package Slim
  * @author  Jose da Silva <http://josedasilva.net>
  */
-class Smarty extends \Slim\View
+class Smarty extends \Slim\Views\View
 {
     /**
      * @var string The path to the Smarty code directory WITHOUT the trailing slash

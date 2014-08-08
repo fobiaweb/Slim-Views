@@ -42,7 +42,7 @@ namespace Slim\Views;
  * - parserDirectory
  * - parserOptions
  */
-class Twig extends \Slim\View
+class Twig extends \Slim\Views\View
 {
     /**
      * @var string The path to the Twig code directory WITHOUT the trailing slash
